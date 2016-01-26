@@ -22,6 +22,7 @@ class BinaryTree {
 					currentNode = currentNode.left;
 				} else {
 					currentNode.left = new Node(data);
+					//this.count++;
 					break;
 				}
 			}
@@ -31,6 +32,7 @@ class BinaryTree {
 					currentNode = currentNode.right;
 				} else {
 					currentNode.right = new Node(data);
+					//this.count++;
 					break;
 				}
 			}
@@ -118,13 +120,14 @@ class BinaryTree {
 			if (this.root.left === null && this.root.right === null) {
 				//debugger;
 				this.root = null;
+				//this.count--;
 				return;
 			}
 			// if root element has at least one child
 			if (this.root.left !== null || this.root.right !== null) {
 				//debugger;
 				if (this.root.left !== null) {
-					
+
 				}
 			}
 		}
@@ -137,6 +140,7 @@ class BinaryTree {
 			} else {
 				parentNode.right = null;
 			}
+			//this.count--;
 			return;
 		}
 
@@ -148,6 +152,7 @@ class BinaryTree {
 			} else {
 				parentNode.right = currentNode.left;
 			}
+			//this.count--;
 			return;
 		}
 
@@ -159,13 +164,26 @@ class BinaryTree {
 			} else {
 				parentNode.right = currentNode.right;
 			}
+			//this.count--;
 			return;
 		}
 
 	}
 
 	size() {
+		debugger;
+		var move = function(node) {
+			var count = 0;
+			if (node.left !== null) {
+				count += move(node.left);
+			}
+			if (node.right !== null) {
+				count += move(node.right);
+			}
+			return count; 
+		};
 
+		return move(this.root);
 	}
 
 	isEmpty() {
