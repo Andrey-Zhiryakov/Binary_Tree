@@ -7,7 +7,7 @@ class BinaryTree {
 	}
 
 	insert(data) {
-		if (this.root === null) {							//if tree is clear, add data to root 
+		if (this.isEmpty()) {							//if tree is clear, add data to root 
 			this.root = new Node(data);
 			return;
 		}
