@@ -117,7 +117,18 @@ class BinaryTree {
 			return;
 		}
 
-		//delete node with 1 child
+		//delete node with one left child
+		if (currentNode.left !== null && currentNode.right === null) {
+			debugger;
+			if (currentNode.data < parentNode.data) {
+				parentNode.left = currentNode.left;
+			} else {
+				parentNode.right = currentNode.left;
+			}
+			return;
+		}
+
+
 
 	}
 
