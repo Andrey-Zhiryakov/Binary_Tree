@@ -7,7 +7,7 @@ class BinaryTree {
 	}
 
 	insert(data) {
-		if (this.isEmpty()) {							//if tree is clear, add data to root 
+		if (this.root === null) {							//if tree is clear, add data to root 
 			this.root = new Node(data);
 			return;
 		}
@@ -43,7 +43,35 @@ class BinaryTree {
 	}
 
 	contains(data) {
+		if (this.isEmpty()) {
+			return false;
+		}
 
+		var currentNode = this.root;	
+
+		while (true) {								// look for node, that data is bigger or smaller than receive data
+			//console.log(currentNode.data);					//debug string
+
+			if (data < currentNode.data) {					//this 'if' statement search for lowest node element
+				if (currentNode.left !== null) {
+					currentNode = currentNode.left;
+				} else {
+					return false;
+				}
+			}
+
+			if (data > currentNode.data) {					//this 'if' statement search for highest node element
+				if (currentNode.right !== null) {
+					currentNode = currentNode.right;
+				} else {
+					return false;
+				}
+			}
+
+			if (data === currentNode.data) {
+				return true;
+			}
+		}
 	}
 
 	remove(data) {
