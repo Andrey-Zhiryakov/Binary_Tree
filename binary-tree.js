@@ -82,12 +82,18 @@ class BinaryTree {
 		var currentNode = this.root;
 		var parentNode = null;
 
-		while (true) {							//search for required node								
-			if (currentNode.left.data === data) {
+		while (true) {							//search for required node	
+
+			//at first we are sift the root
+			if (data === this.root.data) {
+				break;
+			}
+
+			if (currentNode.left.data === data) {					//is the left node needed?
 				parentNode = currentNode;
 				currentNode = currentNode.left;
 				break;
-			} else if (currentNode.right.data === data) {
+			} else if (currentNode.right.data === data) {				//is the right node needed?
 				parentNode = currentNode;
 				currentNode = currentNode.right;
 				break;
@@ -106,6 +112,23 @@ class BinaryTree {
 			}
 		}
 
+		// root node
+		if (parentNode === null) {
+			//debugger;
+			if (this.root.left === null && this.root.right === null) {
+				//debugger;
+				this.root = null;
+				return;
+			}
+			// if root element has at least one child
+			if (this.root.left !== null || this.root.right !== null) {
+				//debugger;
+				if (this.root.left !== null) {
+					
+				}
+			}
+		}
+
 		//delete node without children
 		if (currentNode.left === null && currentNode.right === null) {
 			//debugger;
@@ -119,7 +142,7 @@ class BinaryTree {
 
 		//delete node with one left child
 		if (currentNode.left !== null && currentNode.right === null) {
-			debugger;
+			//debugger;
 			if (currentNode.data < parentNode.data) {
 				parentNode.left = currentNode.left;
 			} else {
@@ -128,7 +151,16 @@ class BinaryTree {
 			return;
 		}
 
-
+		//delete node with one right child
+		if (currentNode.left === null && currentNode.right !== null) {
+			//debugger;
+			if (currentNode.data < parentNode.data) {
+				parentNode.left = currentNode.right;
+			} else {
+				parentNode.right = currentNode.right;
+			}
+			return;
+		}
 
 	}
 
