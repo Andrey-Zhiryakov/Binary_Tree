@@ -23,6 +23,6 @@ class BinaryTree {
 	}
 
 	isEmpty() {
-
+		return this.root === null ? true : false;
 	}
 }
