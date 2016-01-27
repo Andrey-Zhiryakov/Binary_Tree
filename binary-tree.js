@@ -1,19 +1,15 @@
 'use strict';
 
 class BinaryTree {
-
 	constructor() {
 		this.root = null;
 	}
-
 	insert(data) {
 		if (this.isEmpty()) {							//if tree is clear, add data to root 
 			this.root = new Node(data);
 			return;
 		}
-
 		var currentNode = this.root;	
-
 		while (true) {								// look for node, that data is bigger or smaller than receive data
 			if (data < currentNode.data) {					//this 'if' statement search for lowest node element
 				if (currentNode.left !== null) {
@@ -23,7 +19,6 @@ class BinaryTree {
 					break;
 				}
 			}
-
 			if (data > currentNode.data) {					//this 'if' statement search for highest node element
 				if (currentNode.right !== null) {
 					currentNode = currentNode.right;
@@ -32,21 +27,17 @@ class BinaryTree {
 					break;
 				}
 			}
-
 			if (data === currentNode.data) {
 				console.log("Already exist!");
 				break;
 			}
 		}
 	}
-
 	contains(data) {
 		if (this.isEmpty()) {
 			return false;
 		}
-
 		var currentNode = this.root;	
-
 		while (true) {								// look for node, that data is bigger or smaller than receive data
 			if (data < currentNode.data) {					//this 'if' statement search for lowest node element
 				if (currentNode.left !== null) {
@@ -55,7 +46,6 @@ class BinaryTree {
 					return false;
 				}
 			}
-
 			if (data > currentNode.data) {					//this 'if' statement search for highest node element
 				if (currentNode.right !== null) {
 					currentNode = currentNode.right;
@@ -63,21 +53,17 @@ class BinaryTree {
 					return false;
 				}
 			}
-
 			if (data === currentNode.data) {
 				return true;
 			}
 		}
 	}
-
 	remove(data) {
 		if (this.isEmpty() || !this.contains(data)) {
 			return;
 		} 
-
 		var currentNode = this.root;
 		var parentNode = null;
-
 		while (currentNode.data !== data) {							//search for required node	
 			parentNode = currentNode;
 			if (data < currentNode.data) {
@@ -86,14 +72,11 @@ class BinaryTree {
 				currentNode = currentNode.right;
 			}
 		}
-
 		if (currentNode.left === currentNode.right) {
-			//root element
 			if (parentNode === null) {
 				this.root = null;
 				return;
 			}
-			// not root elements
 			if (parentNode.left === currentNode) {
 				parentNode.left = null;
 			} else {
@@ -101,14 +84,11 @@ class BinaryTree {
 			}
 		}
 		if (currentNode.left !== null || currentNode.right !== null) {
-			//getting child node (this makes code shortly)
 			if (currentNode.left !== null) {
 				var childNode = currentNode.left;
 			} else {
 				childNode = currentNode.right;
 			}
-
-			//root element
 			if (parentNode === null) {
 				this.root = childNode;
 			} else {							//not root element
@@ -121,22 +101,18 @@ class BinaryTree {
 		} else if (currentNode.left !== null && currentNode.right !== null) {
 			var leftmostNode = currentNode.right;
 			var leftmostNodeParent = currentNode;
-
 			while (leftmostNode.left !== null) {
 				leftmostNodeParent = leftmostNode;
 				leftmostNode  = leftmostNode.left;
 			}
-
 			currentNode.data = leftmostNode.data;
 			leftmostNodeParent.left = null;
 		}
 	}
-
 	size() {
 		if (this.root === null) {
 			return 0;
 		}
-		//debugger;
 		var count = 0;
 		var counter =  function(node) {	
 			if (node.left !== null) {
@@ -147,11 +123,9 @@ class BinaryTree {
 			}
 			count++;
 		};
-
 		counter(this.root);
 		return count;
 	}
-
 	isEmpty() {
 		return this.root === null;
 	}
