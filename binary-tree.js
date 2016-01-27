@@ -22,6 +22,7 @@ class BinaryTree {
 					currentNode = currentNode.left;
 				} else {
 					currentNode.left = new Node(data);
+					//this.count++;
 					break;
 				}
 			}
@@ -31,6 +32,7 @@ class BinaryTree {
 					currentNode = currentNode.right;
 				} else {
 					currentNode.right = new Node(data);
+					//this.count++;
 					break;
 				}
 			}
@@ -75,11 +77,117 @@ class BinaryTree {
 	}
 
 	remove(data) {
+		if (this.isEmpty() || !this.contains(data)) {
+			return;
+		} 
+
+		var currentNode = this.root;
+		var parentNode = null;
+
+		while (true) {							//search for required node	
+
+			//at first we are sift the root
+			if (data === this.root.data) {
+				break;
+			}
+
+			if (currentNode.left.data === data) {					//is the left node needed?
+				parentNode = currentNode;
+				currentNode = currentNode.left;
+				break;
+			} else if (currentNode.right.data === data) {				//is the right node needed?
+				parentNode = currentNode;
+				currentNode = currentNode.right;
+				break;
+			} else {
+				if (data < currentNode.data) {					//this 'if' statement search for lowest node element
+					if (currentNode.left !== null) {
+						currentNode = currentNode.left;
+					} 
+				}
+
+				if (data > currentNode.data) {					//this 'if' statement search for highest node element
+					if (currentNode.right !== null) {
+						currentNode = currentNode.right;
+					} 
+				}
+			}
+		}
+
+		// root node
+		if (parentNode === null) {
+			//debugger;
+			if (this.root.left === null && this.root.right === null) {
+				//debugger;
+				this.root = null;
+				//this.count--;
+				return;
+			}
+			// if root element has at least one child
+			if (this.root.left !== null || this.root.right !== null) {
+				//debugger;
+				if (this.root.left !== null) {
+
+				}
+			}
+		}
+
+		//delete node without children
+		if (currentNode.left === null && currentNode.right === null) {
+			//debugger;
+			if (currentNode.data < parentNode.data) {
+				parentNode.left = null;
+			} else {
+				parentNode.right = null;
+			}
+			//this.count--;
+			return;
+		}
+
+		//delete node with one left child
+		if (currentNode.left !== null && currentNode.right === null) {
+			//debugger;
+			if (currentNode.data < parentNode.data) {
+				parentNode.left = currentNode.left;
+			} else {
+				parentNode.right = currentNode.left;
+			}
+			//this.count--;
+			return;
+		}
+
+		//delete node with one right child
+		if (currentNode.left === null && currentNode.right !== null) {
+			//debugger;
+			if (currentNode.data < parentNode.data) {
+				parentNode.left = currentNode.right;
+			} else {
+				parentNode.right = currentNode.right;
+			}
+			//this.count--;
+			return;
+		}
 
 	}
 
 	size() {
+		if (this.root === null) {
+			return 0;
+		}
+		//debugger;
+		var count = 0;
+		var counter =  function(node) {	
+			if (node.left !== null) {
+				counter(node.left);
+			}
+			if (node.right !== null) {
+				counter(node.right);
+			}
+			count++;
+		};
 
+		counter(this.root);
+		return count;
 	}
 
 	isEmpty() {
