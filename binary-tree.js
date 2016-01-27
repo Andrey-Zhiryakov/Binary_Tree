@@ -171,19 +171,23 @@ class BinaryTree {
 	}
 
 	size() {
-		debugger;
-		var move = function(node) {
-			var count = 0;
+		if (this.root === null) {
+			return 0;
+		}
+		//debugger;
+		var count = 0;
+		var counter =  function(node) {	
 			if (node.left !== null) {
-				count += move(node.left);
+				counter(node.left);
 			}
 			if (node.right !== null) {
-				count += move(node.right);
+				counter(node.right);
 			}
-			return count; 
+			count++;
 		};
 
-		return move(this.root);
+		counter(this.root);
+		return count;
 	}
 
 	isEmpty() {
